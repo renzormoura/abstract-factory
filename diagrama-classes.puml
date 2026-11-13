@@ -1,0 +1,40 @@
+@startuml
+title Padrão Abstract Factory - Loja de móveis
+skinparam classAttributeIconSize 0
+interface FabricaAbstrata {
+  +createCadeira(): Cadeira
+  +createMesa(): Mesa
+}
+class FabricaModerna
+class FabricaClassica
+interface Cadeira {
+  +descrever(): String
+}
+interface Mesa {
+  +descrever(): String
+}
+class CadeiraModerna
+class CadeiraClassica
+class MesaModerna
+class MesaClassica
+class ConjuntoMoveis {
+  -cadeira: Cadeira
+  -mesa: Mesa
+  +ConjuntoMoveis(fabrica: FabricaAbstrata)
+  +descreverCadeira(): String
+  +descreverMesa(): String
+}
+FabricaAbstrata <|.. FabricaModerna
+FabricaAbstrata <|.. FabricaClassica
+Cadeira <|.. CadeiraModerna
+Cadeira <|.. CadeiraClassica
+Mesa <|.. MesaModerna
+Mesa <|.. MesaClassica
+FabricaModerna ..> CadeiraModerna : cria
+FabricaModerna ..> MesaModerna : cria
+FabricaClassica ..> CadeiraClassica : cria
+FabricaClassica ..> MesaClassica : cria
+ConjuntoMoveis --> Cadeira
+ConjuntoMoveis --> Mesa
+ConjuntoMoveis ..> FabricaAbstrata
+@enduml
